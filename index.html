@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Final Test</title>
+	<script type="text/javascript">
+
+		function finalTest() {
+
+			// Задание №1 ----------------------------
+
+			var position = ["Junior QA engineer", "Middle QA engineer", "Porduct owner", "Senior QA engineer", "Middle developer", "Project manager", "Senior developer", "Junior developer"];
+			var names = [];
+			var objSize = position.length;
+
+			function getNames() {
+
+				for (var i = 0; i < objSize; i++) {
+					var name = prompt('введите имя');
+					names[i] = name;
+				};
+
+				return names;
+			};
+
+			getNames();
+
+			// Задание №2 ----------------------------
+
+			var team = new Object();
+
+			function createTeam() {
+
+				for (var i = 0; i < position.length; i++) {
+					
+					var customer = new Object();
+
+					customer.name = names[i];
+					customer.position = position[i];
+
+					team[i] = customer;
+				}
+
+				return team;
+			};
+			
+			createTeam();
+
+			// Задание №3 ----------------------------
+
+			function setSalary() {
+
+				function getRandomArbitrary(min, max) {
+
+					return Math.floor(Math.random() * (max - min)) + min;
+				}
+
+				for (key in team) {
+
+
+					if ( team[key]['position'].indexOf('Junior') == 0 ) {
+
+						team[key]['salary'] = getRandomArbitrary(500, 1000);
+						
+					} else if ( team[key]['position'].indexOf('Middle') == 0 ) {
+
+						team[key]['salary'] = getRandomArbitrary(1500, 2000);
+
+					} else if ( team[key]['position'].indexOf('Senior') == 0 ) {
+
+						team[key]['salary'] = getRandomArbitrary(2500, 3000);
+
+					} else {
+						team[key]['salary'] = getRandomArbitrary(4000, 4500);
+					}
+					
+				}
+			}
+
+			setSalary();
+
+			// Задание №4 ----------------------------
+
+			function tellAboutYourSelf() {
+
+				for (key in team) {
+
+					team[key]['tellAboutYourSelf'] = function() {
+
+						return console.log('Меня зовут ' + this.name + ' и я - ' + this.position + 'Project manager. Я зарабатываю ' + this.salary + '$.')
+					}
+
+					// team[key].tellAboutYourSelf();
+				}
+			}
+
+			tellAboutYourSelf();
+
+			// Задание №5 ----------------------------
+
+			team['showTeam'] = function() {
+
+				for (key in team) {
+
+					var value = team[key];
+
+					if ( typeof value == "object" ) {
+
+						var name = this[key].name,
+							position = this[key].position,
+							salary = this[key].salary;
+
+						console.log( name + ' - ' + position + '. Зарплата - ' + salary + '$.');
+
+					}
+
+				}
+
+			}
+
+			function additionalTask() {
+
+				team.showTeam();
+			}
+
+			additionalTask();
+
+		}
+
+	</script>
+</head>
+<body>
+
+	<button onclick="finalTest()">Ввести имена в БД</button>
+
+</body>
+</html>
